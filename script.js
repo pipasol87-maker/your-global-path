@@ -85,6 +85,17 @@
   const slots = (typeof window.SLOTS_LEFT === 'number') ? window.SLOTS_LEFT : 10;
   $$('#slotsLeft, #slotsLeft2').forEach(el => { el.textContent = String(slots); });
 
+  // ---------- Scroll to top ----------
+  const scrollTopBtn = $('#scrollTop');
+  if (scrollTopBtn) {
+    window.addEventListener('scroll', () => {
+      scrollTopBtn.classList.toggle('is-visible', window.scrollY > 400);
+    }, { passive: true });
+    scrollTopBtn.addEventListener('click', () => {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+  }
+
   // ---------- Reveal on scroll ----------
   if ('IntersectionObserver' in window) {
     const io = new IntersectionObserver((entries) => {
